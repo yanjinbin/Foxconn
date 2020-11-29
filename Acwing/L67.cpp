@@ -10,8 +10,8 @@ int getNumberOfK(vector<int> &v, int k) {
     return r - l;
 }
 
+//DP lower_bound和upper_bound函数运用
 int main() {
-    //
     vector<int> v = {1, 2, 3, 3, 3, 3, 4, 5};
     cout << getNumberOfK(v, 3) << endl;
 }

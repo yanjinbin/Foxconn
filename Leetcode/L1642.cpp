@@ -1,5 +1,6 @@
-#include <bits/stdc++.h>
-
+#include <numeric>
+#include <vector>
+#include <iostream>
 #define FOR(i, a, b) for (int i = a; i < (b); i++)
 using namespace std;
 

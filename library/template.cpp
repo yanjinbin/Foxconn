@@ -3,8 +3,7 @@
 using namespace std;
 #define debug puts("pigtoria bling bling ⚡️⚡️")
 
-#define For(i, j, k) for (int i = (int)(j); i <= (int)(k); i++)
-#define FOR(i, a, b) for (int i = a; i < (b); i++)
+#define FOR(i, a, b) for (int i = a; i < b; i++)
 #define FORd(i, a, b) for (int i = (b)-1; i >= a; i--)
 #define ll long long
 #define pii pair<int, int>

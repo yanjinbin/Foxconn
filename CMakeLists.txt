@@ -15,7 +15,7 @@ foreach (file ${files})
     message (\ \ \ \ --\ src/${exe}.cpp\ will\ be\ compiled\ to\ bin/${exe})
 endforeach ()
 
-#附录参考:
+#附录参考: ⚠️ 如果main左边没有出现执行按钮 记得点击cmake栏的reload！！！！！
 #1. https://tinyurl.com/y4rmyful
 #2. https://tinyurl.com/y3vkjbaq
 

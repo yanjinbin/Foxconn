@@ -75,4 +75,28 @@ int main() {// https://tinyurl.com/y64wz26k https://tinyurl.com/y5wqw65e
         cout << a + b << endl;
     };
     print_(999, 1);
+
+    vector<string> names(5, "hello");
+    FOR(i, 0, names.size()) {
+        cout << names[i] << " ";
+    }
+    cout << endl;
+    vector<vector<int>> grid(5, vector<int>(5, 1));
+    FOR(i, 0, grid.size()) {
+        FOR(j, 0, grid[i].size()) {
+            cout << grid[i][j] << " | ";
+        }
+        cout << endl;
+    }
+    grid.resize(10);
+    cout << grid.size() << endl;
+
+    cout << endl;
+    FOR(i, 0, grid.size()) {
+        FOR(j, 0, grid[i].size()) {
+            cout << grid[i][j] << " | ";
+        }
+        cout << endl;
+    }
+    cout << "here" << endl;
 }

@@ -99,4 +99,10 @@ int main() {// https://tinyurl.com/y64wz26k https://tinyurl.com/y5wqw65e
         cout << endl;
     }
     cout << "here" << endl;
+    if (m[78]) {
+        cout << m[78] << endl;
+    } else {
+        cout << " no exist" << endl;
+    }
+
 }

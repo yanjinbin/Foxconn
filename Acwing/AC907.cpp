@@ -37,7 +37,8 @@ int main() {
     int res = 0;
     bool success = false;
     int len = vp.size();
-    for (int i = 0; i < len; ++i) {
+    int i = 0;
+    while (i < len) {
         int j = i, r = -INF;
         while (j < len && vp[j].first <= st) {
             r = max(r, vp[j].second);
@@ -53,7 +54,7 @@ int main() {
             break;
         }
         st = r; // update start by r
-        i = j - 1;
+        i = j;
     }
     if (success) cout << res << endl;
     else cout << -1 << endl;

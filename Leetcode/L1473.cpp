@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
-
+#include <tuple>
+#include <algorithm>
 using namespace std;
 
 //  粉刷房子3 https://youtu.be/53b32Upplk0
@@ -20,8 +21,8 @@ public:
             for (int i = k; i <= m; i++) {// i从k开始 优化
                 int hi = houses[i - 1];
                 int hj = i >= 2 ? houses[i - 2] : 0;
-                const auto&[si, ei] = hi ? tie(hi, hi) : tie(s, n);// 为什么必须要加上const
-                const auto&[sj, ej] = hj ? tie(hj, hj) : tie(s, n);
+                const auto &[si, ei] = hi ? tie(hi, hi) : tie(s, n);// 为什么必须要加上const
+                const auto &[sj, ej] = hj ? tie(hj, hj) : tie(s, n);
                 for (int ci = si; ci <= ei; ci++) {
                     int v = ci == hi ? 0 : cost[i - 1][ci - 1];
                     for (int cj = sj; cj <= ej; cj++) {

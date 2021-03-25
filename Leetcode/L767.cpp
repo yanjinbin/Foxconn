@@ -2,7 +2,7 @@
 #include <queue>
 #include <string>
 #include <vector>
-#define pic pair<int, int>
+#define pii pair<int, int>
 using namespace std;
 
 class Solution {
@@ -18,7 +18,7 @@ public:
     }
     if (maxR > (len + 1) / 2)
       return "";
-    priority_queue<pic> maxHeap;
+    priority_queue<pii> maxHeap;
     for (int i = 0; i < cnt.size(); i++) {
       if (cnt[i] > 0)
         maxHeap.push({cnt[i], i});
@@ -27,9 +27,9 @@ public:
     string ans;
 
     while (maxHeap.size() > 1) {
-      pic m1 = maxHeap.top();
+        pii m1 = maxHeap.top();
       maxHeap.pop();
-      pic m2 = maxHeap.top();
+      pii m2 = maxHeap.top();
       maxHeap.pop();
       char c1 = (char)(m1.second + 'a'), c2 = (char)(m2.second + 'a');
       if (c1 == lastContent) {

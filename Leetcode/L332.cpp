@@ -2,6 +2,7 @@
 #include <vector>
 #include <deque>
 #include <unordered_map>
+#include <algorithm>
 
 using namespace std;
 
@@ -16,7 +17,7 @@ public:
 
         for (auto &pair : trips_) {
             auto &dests = pair.second;
-            std::sort(dests.begin(), dests.end());
+            sort(dests.begin(), dests.end());
         }
 
         const string kStart = "JFK";

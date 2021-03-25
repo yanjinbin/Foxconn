@@ -1,6 +1,7 @@
 #include <numeric>
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #define FOR(i, a, b) for (int i = a; i < (b); i++)
 using namespace std;
 

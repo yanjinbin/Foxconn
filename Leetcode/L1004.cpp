@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-const int INF = 0X3F3F3F;
+const int INF = 0X3F3F3F3F;
 
 class Solution {
    public:

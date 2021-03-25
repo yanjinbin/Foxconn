@@ -3,6 +3,7 @@
 #include <tuple>
 #include <algorithm>
 using namespace std;
+const int INF = 0x3F3F3F3F;
 
 //  粉刷房子3 https://youtu.be/53b32Upplk0
 // 状态转移方程式 https://zxi.mytechroad.com/blog/wp-content/uploads/2020/06/1473-ep333.png
@@ -12,7 +13,7 @@ using namespace std;
 class Solution {
 public:
     int minCost(vector<int> &houses, vector<vector<int>> &cost, int m, int n, int target) {
-        int INF = 0x3F3F3F, s = 1;
+        int s = 1;
         // INIT
         vector<vector<vector<int>>> dp(target + 1, vector<vector<int>>(m + 1, vector<int>(n + 1, INF)));
         fill(begin(dp[0][0]), end(dp[0][0]), 0);

@@ -2,11 +2,10 @@
 #include <iostream>
 
 using namespace std;
-
+const int INF = 0x3F3F3F3F;
 class Solution {
 public:
     int maxProfit(vector<int> &prices) {
-        int INF = 0x3F3F3F;
         int minPrice = INF;
         int ans = 0;
         for (int i = 0; i < prices.size(); i++) {

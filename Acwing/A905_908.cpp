@@ -5,7 +5,7 @@
 #define pii pair<int, int>
 using namespace std;
 
-int INF = 0x3F3F3F3F;
+const int INF = 0x3F3F3F3F;
 
 class Solution {
  public:

@@ -23,13 +23,12 @@ const int MOD = 1E9 + 7;
 #define FI first
 #define SE second
 
-
-// tag: 二分
+// tag: 二分 https://youtu.be/Xy5f8IAEsJg?t=1514 https://www.cnblogs.com/grandyang/p/6620351.html
 class Solution {
 public:
     string smallestGoodBase(string n) {
         LL num = stol(n);
-        for (int i = log(num + 1) / log(2); i >= 2; i--) {
+        for (int i = log(num) / log(2)+1 ; i >= 2; i--) { // +1 是因为case n = 15
             LL lo = 2, hi = pow(num, 1.0 / (i - 1)) + 1;
             while (lo < hi) {
                 LL mid = (hi - lo) / 2 + lo;
@@ -47,6 +46,12 @@ public:
 };
 
 int main() {
-
+    fastio
+    Solution INSTANCE;
+    string ans = INSTANCE.smallestGoodBase("15");
+    cout << ans << endl;
+    int i = log(15) / log(2) +1;
+    double ret = pow(15, 1.0 / (i - 1));
+    cout << i << " " << ret << endl;
     return 0;
 }

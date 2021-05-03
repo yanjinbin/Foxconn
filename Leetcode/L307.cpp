@@ -8,9 +8,8 @@
 
 using namespace std;
 
-const int INF = 0x3F3F3F3F;
-const int MOD = 1E9 + 7;
-#define speedio ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+const int MAX_VALUE = 0x7FFFFFFF, MIN_VALUE = 0x80000000, INF = 0x3F3F3F3F, MOD = 1E9 + 7;
+#define fastio ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
 #define debug puts("pigtoria bling bling ⚡️⚡️");
 #define FOR(i, a, b) for (int i = a; i < b; i++)
 #define pii pair<int, int>
@@ -30,7 +29,6 @@ class NumArray {
         SegTreeNode *right;
         int start, end;
         int info;
-
         SegTreeNode(int a, int b) : start(a), end(b), info(0), left(NULL), right(NULL) {}
     };
 
@@ -91,9 +89,9 @@ public:
     }
 };
 
-// tag:线段树 segement tree
+// tag:线段树 Segment tree
 int main() {
-    speedio
+    fastio
     vector<int> nums = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     NumArray INSTANCE{nums};
     INSTANCE.update(0, 0);

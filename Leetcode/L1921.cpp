@@ -25,3 +25,20 @@ const int MAX_VALUE = 0x7FFFFFFF, MIN_VALUE = 0x80000000, INF = 0x3F3F3F3F, kMod
 #define FI first
 #define SE second
 
+class Solution {
+public:
+  int eliminateMaximum(vector<int> &dist, vector<int> &speed) {
+    int n = dist.size();
+    vector<float> time;
+    for (int i = 0; i < n; i++) {
+      time.PB((dist[i]) * 1.0 / speed[i]);
+    }
+    sort(time.begin(), time.end());
+    for (int i = 0; i < n; i++) {
+      if (time[i] <= i) {
+        return i;
+      }
+    }
+    return n;
+  }
+};

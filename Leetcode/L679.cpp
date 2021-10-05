@@ -56,9 +56,7 @@ public:
       unordered_set<double> B = helper(nums, i + 1, hi);
       for (auto x : A) {
         for (auto y : B) {
-          rets.insert(x + y);
-          rets.insert(x - y);
-          rets.insert(x * y);
+          rets.insert({x + y, x - y, x * y});
           if (y != 0)
             rets.insert(x / y);
         }

@@ -12,10 +12,7 @@
 
 using namespace std;
 const int MAX_VALUE = 0x7FFFFFFF, MIN_VALUE = 0x80000000, INF = 0x3F3F3F3F, kMod = 1E9 + 7;
-#define fastio                                                                                                                                                                                         \
-  ios_base::sync_with_stdio(false);                                                                                                                                                                    \
-  cin.tie(0);                                                                                                                                                                                          \
-  cout.tie(0);
+#define fastio ios_base::sync_with_stdio(false), cin.tie(0), cout.tie(0);
 #define debug puts("pigtoria bling bling ⚡️⚡️");
 #define FOR(i, a, b) for (int i = a; i < b; i++)
 #define pii pair<int, int>
@@ -39,7 +36,6 @@ public:
     auto dp = vector<vector<int>>(m + 1, vector<int>(m + 1, -INF));
     nums.insert(nums.begin(), 0);
     dp[0][0] = 0;
-
     int ans = -INF;
     for (int len = 1; len <= m; ++len) {
       for (int i = 0; i <= len; ++i) {

@@ -38,15 +38,15 @@ public:
         return ans;
     }
 
-    long long maxAlternatingSum(vector<int> &nums) {
-        int n = nums.size();
-        vector <vector<LL>> f(n, vector<LL>(2, 0));
-        f[0][0] = nums[0];
-        f[0][1] = 0;
-        for (int i = 1; i < nums.size(); ++i) {
-            f[i][0] = max(f[i - 1][0], f[i - 1][1] + nums[i]);
-            f[i][1] = max(f[i - 1][1], f[i - 1][0] - nums[i]);
-        }
-        return max(f[n - 1][0], f[n - 1][1]);
+    long long maxAlternatingSum_(vector<int> &nums) {
+      int n = nums.size();
+      vector<vector<LL>> f(n, vector<LL>(2, 0));
+      f[0][0] = nums[0];
+      f[0][1] = 0;
+      for (int i = 1; i < nums.size(); ++i) {
+        f[i][0] = max(f[i - 1][0], f[i - 1][1] + nums[i]);
+        f[i][1] = max(f[i - 1][1], f[i - 1][0] - nums[i]);
+      }
+      return max(f[n - 1][0], f[n - 1][1]);
     }
 };

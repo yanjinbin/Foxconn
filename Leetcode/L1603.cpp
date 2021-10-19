@@ -25,9 +25,37 @@ const int MAX_VALUE = 0x7FFFFFFF, MIN_VALUE = 0x80000000, INF = 0x3F3F3F3F, kMod
 #define FI first
 #define SE second
 
-// https://bit.ly/3ona4UF
-// 组合数学
-class Solution {
+// tag: 设计题 设计停车系统
+class ParkingSystem {
+private:
+  int s, m, b;
+
 public:
-  int rearrangeSticks(int n, int k) {}
+  ParkingSystem(int big, int medium, int small) : s(small), m(medium), b(big) {}
+
+  bool addCar(int carType) {
+    if (carType == 1) {
+      if (b > 0) {
+        b--;
+        return true;
+      }
+    } else if (carType == 2) {
+      if (m > 0) {
+        m--;
+        return true;
+      }
+    } else if (carType == 3) {
+      if (s > 0) {
+        s--;
+        return true;
+      }
+    }
+    return false;
+  }
 };
+
+/**
+ * Your ParkingSystem object will be instantiated and called as such:
+ * ParkingSystem* obj = new ParkingSystem(big, medium, small);
+ * bool param_1 = obj->addCar(carType);
+ */

@@ -56,26 +56,6 @@ public:
     ranges_.swap(_ranges_);
   }
 
-// void addRange(int left, int right) {
-//         vector<pair<int, int>> new_ranges;
-//         bool inserted = false;
-//         for (const auto& kv : ranges_) {            
-//             if (kv.first > right && !inserted) {
-//                 new_ranges.emplace_back(left, right);
-//                 inserted = true;
-//             }
-//             if (kv.second < left || kv.first > right) { 
-//                 new_ranges.push_back(kv);
-//             } else {
-//                 left = min(left, kv.first);
-//                 right = max(right, kv.second);
-//             }
-//         }       
-//         if (!inserted) new_ranges.emplace_back(left, right);       
-//         ranges_.swap(new_ranges);
-//     }
-
-
   bool queryRange(int left, int right) {
     const int n = ranges_.size();
     int l = 0, r = n;
@@ -108,3 +88,59 @@ public:
   }
 };
 
+//==============
+class RangeList {
+public:
+  RangeModule() {}
+
+  void addRange(int left, int right) {
+    IT st, ed;
+    overlapRanges(left, right, st, ed);
+    if (st != ed) {
+      auto last = ed;
+      last--;
+      left = min(left, st->first);
+      right = max(right, last->second);
+      ranges_.erase(st, ed);
+    }
+    ranges_[left] = right;
+  }
+
+  bool queryRange(int left, int right) {
+    IT l, r;
+    overlapRanges(left, right, l, r);
+    // No overlapping range
+    if (l == r)
+      return false;
+    return l->first <= left && l->second >= right;
+  }
+
+  void removeRange(int left, int right) {
+    IT st, ed;
+    overlapRanges(left, right, st, ed);
+    if (st == ed)
+      return;
+    auto last = ed;
+    last--;
+    int lo = min(left, st->first);
+    int hi = max(right, last->second);
+    ranges_.erase(st, ed);
+    if (lo < left)
+      ranges_[lo] = left;
+    if (hi > right)
+      ranges_[right] = hi;
+  }
+
+private:
+  typedef map<int, int>::iterator IT;
+  map<int, int> ranges_;
+  void overlapRanges(int left, int right, IT &st, IT &ed) {
+    st = ranges_.upper_bound(left);
+    ed = ranges_.upper_bound(right);
+    if (st != ranges_.begin()) {
+      if ((--st)->second < left) {
+        st++;
+      }
+    }
+  }
+}

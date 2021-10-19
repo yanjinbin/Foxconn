@@ -25,9 +25,24 @@ const int MAX_VALUE = 0x7FFFFFFF, MIN_VALUE = 0x80000000, INF = 0x3F3F3F3F, kMod
 #define FI first
 #define SE second
 
-// https://bit.ly/3ona4UF
-// 组合数学
-class Solution {
+class RecentCounter {
+private:
+  queue<int> q_;
+
 public:
-  int rearrangeSticks(int n, int k) {}
+  RecentCounter() {}
+
+  int ping(int t) {
+    q_.push(t);
+    while (!q_.empty() && q_.front() < t - 3000) {
+      q_.pop();
+    }
+    return q_.size();
+  }
 };
+
+/**
+ * Your RecentCounter object will be instantiated and called as such:
+ * RecentCounter* obj = new RecentCounter();
+ * int param_1 = obj->ping(t);
+ */

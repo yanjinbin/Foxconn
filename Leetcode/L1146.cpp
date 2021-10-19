@@ -25,9 +25,32 @@ const int MAX_VALUE = 0x7FFFFFFF, MIN_VALUE = 0x80000000, INF = 0x3F3F3F3F, kMod
 #define FI first
 #define SE second
 
-// https://bit.ly/3ona4UF
-// 组合数学
-class Solution {
+// tag: 设计题  时间数组快照 vector map
+class SnapshotArray {
+private:
+  int id_;
+  vector<map<int, int>> dicts;
+
 public:
-  int rearrangeSticks(int n, int k) {}
+  SnapshotArray(int length) : id_(0), dicts(length) {}
+
+  void set(int index, int val) { dicts[index][id_] = val; }
+
+  int snap() { return id_++; }
+
+  int get(int index, int snap_id) {
+    auto it = dicts[index].upper_bound(snap_id);
+    if (it == dicts[index].begin())
+      return 0;
+    else
+      return prev(it)->second;
+  }
 };
+
+/**
+ * Your SnapshotArray object will be instantiated and called as such:
+ * SnapshotArray* obj = new SnapshotArray(length);
+ * obj->set(index,val);
+ * int param_2 = obj-≤>snap();
+ * int param_3 = obj->get(index,snap_id);
+ */

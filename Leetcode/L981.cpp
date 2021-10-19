@@ -25,9 +25,30 @@ const int MAX_VALUE = 0x7FFFFFFF, MIN_VALUE = 0x80000000, INF = 0x3F3F3F3F, kMod
 #define FI first
 #define SE second
 
-// https://bit.ly/3ona4UF
-// 组合数学
-class Solution {
+// tag:  设计题 时间存储 类似 1146 时间数组快照
+class TimeMap {
+private:
+  unordered_map<string, map<int, string>> d_;
+
 public:
-  int rearrangeSticks(int n, int k) {}
+  TimeMap() {}
+
+  void set(string key, string value, int timestamp) { d_[key].emplace(timestamp, value); }
+
+  string get(string key, int timestamp) {
+    auto m = d_.find(key);
+    if (m == d_.end())
+      return "";
+    auto it = m->second.upper_bound(timestamp);
+    if (it == m->second.begin())
+      return "";
+    return prev(it)->second;
+  }
 };
+
+/**
+ * Your TimeMap object will be instantiated and called as such:
+ * TimeMap* obj = new TimeMap();
+ * obj->set(key,value,timestamp);
+ * string param_2 = obj->get(key,timestamp);
+ */

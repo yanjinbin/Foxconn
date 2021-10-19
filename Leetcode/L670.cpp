@@ -24,25 +24,32 @@ const int MAX_VALUE = 0x7FFFFFFF, MIN_VALUE = 0x80000000, INF = 0x3F3F3F3F, kMod
 #define SE second
 
 // CASE 993276->997236
-class Solution {
+
+236799 997632
+    //
+    class Solution {
 public:
-    int maximumSwap(int num) {
-        string s = to_string(num);
-        string t = s;
-        sort(t.begin(), t.end());
-        reverse(t.begin(), t.end());
-        int pos = 0, i = 0;
-        for (; i < s.size(); ++i) {
-            if (s[i] != t[i]) {
-                break;
+  int maximumSwap(int num) {
+    string s = to_string(num);
+    string t = s;
+    sort(t.begin(), t.end());
+    reverse(t.begin(), t.end());
+    int pos = 0, i = 0;
+    for (; i < s.size(); ++i) {
+      if (s[i] != t[i]) {
+        break;
             }
-        }
-        if (i == s.size())return num;
-        //general
-        for (int j = i + 1; j < s.size(); j++) {
-            if (s[j] == t[i]) pos = j;
-        }
-        swap(s[i], s[pos]);
-        return stoi(s);
     }
+    if (i == s.size())
+      return num;
+    // general
+    for (int j = i + 1; j < s.size(); j++) {
+      if (s[j] == t[i])
+        pos = j;
+    }
+    swap(s[i], s[pos]);
+    return stoi(s);
+  }
 };
+
+int main() { Solution INSTANCE INSTANCE.maximumSwap(993276) }

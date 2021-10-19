@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <climits>
 #include <cmath>
 #include <functional>
 #include <iostream>
@@ -25,9 +24,26 @@ const int MAX_VALUE = 0x7FFFFFFF, MIN_VALUE = 0x80000000, INF = 0x3F3F3F3F, kMod
 #define FI first
 #define SE second
 
-// https://bit.ly/3ona4UF
-// 组合数学
 class Solution {
 public:
-  int rearrangeSticks(int n, int k) {}
+  bool validateStackSequences(vector<int> &pushed, vector<int> &popped) {
+    stack<int> s;
+    int idx = 0;
+    for (int i = 0; i < pushed.size(); i++) {
+      while (!s.empty() && s.top() == popped[idx]) {
+        s.pop();
+        idx++;
+      }
+      s.push(pushed[i]);
+    }
+    while (!s.empty()) {
+      int val = s.top();
+      s.pop();
+      if (val != popped[idx])
+        return false;
+      else
+        idx++;
+    }
+    return true;
+  }
 };

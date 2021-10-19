@@ -1,11 +1,14 @@
+#include <algorithm>
 #include <iostream>
 #include <queue>
 #include <vector>
+
 #define pii pair<int, int>
 using namespace std;
 
 struct Point {
   int x, y, z;
+
   // operator > < 分表代表实现greater 和 less 比较器
   //  bool operator<(const Point &p) const { return this->x < p.x; }  // less
   bool operator>(const Point &p) const { return this->x > p.x; }  // greater
@@ -25,6 +28,7 @@ struct cmper {  // 自定义一个comparator struct
 struct Node {
   int x, y, z;
 };
+
 bool operator<(Node p1, Node p2) {
   return p1.x < p2.x;
 }  // 默认的less比较器，可以放在struct之外
@@ -37,8 +41,10 @@ struct cmpPII {
     return p1.first == p2.first ? p1.second > p2.second : p1.first > p2.first;
   }
 };
+
 // https://tinyurl.com/y6qyfa2s
 int main() {
+  cout << endl;
   vector<Point> vec;
   vec.push_back({1, 2, 3});
   vec.push_back({3, 4, 5});
@@ -87,5 +93,6 @@ int main() {
           "p2.x; }\n"
           "}; 也适合vector和priority_queue"
        << endl;
+  string line;
   return 0;
 }

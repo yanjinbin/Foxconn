@@ -25,9 +25,7 @@ const int MAX_VALUE = 0x7FFFFFFF, MIN_VALUE = 0x80000000, INF = 0x3F3F3F3F, kMod
 #define FI first
 #define SE second
 
-// https://bit.ly/3ona4UF
-// 组合数学
 class Solution {
 public:
-  int rearrangeSticks(int n, int k) {}
+  bool circularArrayLoop(vector<int> &nums) {}
 };

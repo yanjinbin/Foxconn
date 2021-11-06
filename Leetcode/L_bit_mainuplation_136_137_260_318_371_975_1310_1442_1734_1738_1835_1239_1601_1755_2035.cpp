@@ -218,6 +218,25 @@ public:
     return count;
   }
 
+  // 1835  https://youtu.be/W0tTPpOgTxM
+  int getXORSum(vector<int> &arr1, vector<int> &arr2) {
+    vector<int> ones(32);
+    for (auto x : arr2)
+      for (int i = 0; i < 32; i++)
+        if (((x >> i) & 1) == 1)
+          ones[i]++;
+
+    int ret = 0;
+    for (auto x : arr1) {
+      int ans = 0;
+      for (int i = 0; i < 32; i++)
+        if (((x >> i) & 1 == 1) && (ones[i] % 2 == 1))
+          ans += (1 << i);
+      ret ^= ans;
+    }
+    return ret;
+  }
+
   // =============================================分割线=============================================
   // tag: bit-mask
 

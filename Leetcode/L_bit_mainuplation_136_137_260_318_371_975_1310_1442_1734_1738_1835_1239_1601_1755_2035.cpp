@@ -27,6 +27,32 @@ const int MAX_VALUE = 0x7FFFFFFF, MIN_VALUE = 0x80000000, INF = 0x3F3F3F3F, kMod
 // bit manipulation
 class Solution {
 public:
+  // 89 格雷码 https://youtu.be/K3_IvifT0pI
+  vector<int> grayCode_02(int n) {
+    vector<int> rets = {0};
+    if (n == 0)
+      return rets;
+    for (int i = 0; i < n; i++) {
+      int len = rets.size();
+      for (int j = len - 1; j >= 0; j--) {
+        rets.PB(rets[j] | (1 << i));
+      }
+    }
+    return rets;
+  }
+
+  // https://bit.ly/3n34tns
+  vector<int> grayCode_01(int n) {
+    int start = 0;
+    int nn = 1 << n;
+    vector<int> res(nn, 0);
+    for (int i = 0; i < nn; ++i) {
+      res[i] = i ^ (i >> 1) ^ start;
+    }
+
+    return res;
+  }
+
   // L136
   int singleNumber(vector<int> &nums) {
     int ans = 0; // 取 0 是因为 0 ^ A = A // A ^ A = 0 , A ^ B ^ B = A

@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <climits>
 #include <cmath>
 #include <functional>
 #include <iostream>
@@ -27,5 +26,13 @@ const int MAX_VALUE = 0x7FFFFFFF, MIN_VALUE = 0x80000000, INF = 0x3F3F3F3F, kMod
 
 class Solution {
 public:
-  int getXORSum(vector<int> &arr1, vector<int> &arr2) {}
+  vector<vector<int>> kClosest(vector<vector<int>> &points, int k) {
+    vector<pair<LL, int>> arr;
+    for (int i = 0; i < points.size(); i++) {
+      LL x = points[i][0];
+      LL y = points[i][1];
+      LL d = x * x + y * y;
+      arr.PB({d, i});
+    }
+  }
 };

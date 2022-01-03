@@ -175,7 +175,42 @@ public:
   }
 
   // 1595
-  int connectTwoGroups(vector<vector<int>> &cost) {}
+  // dp[i][state] <-dp[i-1][state-subset]
+  // dp[i][state]<-dp[i-1][state] , visited pointed
+  int connectTwoGroups(vector<vector<int>> &cost) {
+    int m = cost.size();
+    int n = cost[0].size();
+    vector<vector<int>> dp(m, vector<int>(1 << n, INF));
+    // init i=0;
+    for (int state = 1; state < (1 << n); state++) { // state 从 1开始
+      int sum = 0;
+      for (int j = 0; j < n; j++) {
+        if (((state >> j) & 1) == 1) {
+          sum += cost[0][j];
+        }
+      }
+      dp[0][state] = sum;
+    }
+
+    for (int i = 1; i < m; i++) {
+      for (int state = 0; state < (1 << n); state++) {
+
+        for (int subset = state; subset > 0; subset = (subset - 1) & state) {
+          // 遍历1
+          int sum = 0;
+          for (int j = 0; j < n; j++)
+            if ((subset >> j) & 1)
+              sum += cost[i][j];
+          dp[i][state] = min(dp[i][state], dp[i - 1][state - subset] + sum);
+        }
+        int minPath = INF;
+        for (int j = 0; j < n; j++)
+          minPath = min(minPath, cost[i][j]);
+        dp[i][state] = min(dp[i][state], dp[i - 1][state] + minPath);
+      }
+    }
+    return dp[m - 1][(1 << n) - 1];
+  }
 
   // 1986
 

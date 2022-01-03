@@ -23,9 +23,3 @@ const int MAX_VALUE = 0x7FFFFFFF, MIN_VALUE = 0x80000000, INF = 0x3F3F3F3F, kMod
 #define MP make_pair
 #define FI first
 #define SE second
-
-// DP
-class Solution {
-public:
-  int jobScheduling(vector<int> &startTime, vector<int> &endTime, vector<int> &profit) {}
-};

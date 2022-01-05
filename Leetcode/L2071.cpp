@@ -13,7 +13,7 @@
 using namespace std;
 const int MAX_VALUE = 0x7FFFFFFF, MIN_VALUE = 0x80000000, INF = 0x3F3F3F3F, kMod = 1E9 + 7;
 #define fastio ios_base::sync_with_stdio(false), cin.tie(0), cout.tie(0);
-#define debug puts("pigtoria bling bling ⚡️⚡️");
+#define debug puts("🌟⭐🌟 bling bling ⚡️⚡️");
 #define FOR(i, a, b) for (int i = a; i < b; i++)
 #define pii pair<int, int>
 #define LL long long
@@ -42,9 +42,7 @@ public:
   }
 
   bool ok(vector<int> &tasks, vector<int> &workers, int pills, int strength, int num) {
-    if (num > tasks.size())
-      return false;
-    if (num > workers.size())
+    if (num > tasks.size() || num > workers.size())
       return false;
     multiset<int> Set(workers.begin(), workers.end());
     for (int i = num - 1; i >= 0; i--) {
@@ -56,6 +54,7 @@ public:
         auto iter = Set.lower_bound(tasks[i] - strength);
         if (iter == Set.end())
           return false;
+        Set.erase(iter);
         pills--;
       }
     }

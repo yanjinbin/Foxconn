@@ -26,7 +26,7 @@ const int MAX_VALUE = 0x7FFFFFFF, MIN_VALUE = 0x80000000, INF = 0x3F3F3F3F, kMod
 #define MP make_pair
 #define FI first
 #define SE second
-
+// tag: 1062
 class Solution {
 public:
   string longestDupSubstring(string s) {}

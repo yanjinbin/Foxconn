@@ -25,6 +25,7 @@ const int MAX_VALUE = 0x7FFFFFFF, MIN_VALUE = 0x80000000, INF = 0x3F3F3F3F, kMod
 #define FI first
 #define SE second
 
+// 差分数组
 class Solution {
 public:
     int minKBitFlips(vector<int>& nums, int k) {

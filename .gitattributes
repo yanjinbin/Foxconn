@@ -427,7 +427,6 @@ Temporary Items
 ### Vim ###
 # Swap
 [._]*.s[a-v][a-z]
-!*.svg  # comment out if you don't need vector files
 [._]*.sw[a-p]
 [._]s[a-rt-v][a-z]
 [._]ss[a-gi-z]
@@ -498,6 +497,6 @@ zsdoc/data
 
 # Zunit tests' output
 /tests/_output/*
-!/tests/_output/.gitkeep
+
 
 # End of https://www.toptal.com/developers/gitignore/api/jetbrains,git,cmake,c++,zsh,powershell,windows,macos,emacs,vim,goland,intellij

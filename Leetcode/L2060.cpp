@@ -27,5 +27,7 @@ const int MAX_VALUE = 0x7FFFFFFF, MIN_VALUE = 0x80000000, INF = 0x3F3F3F3F, kMod
 // tag: dp
 class Solution {
 public:
-  bool possiblyEquals(string s1, string s2) {}
+  bool possiblyEquals(string s1, string s2) {
+
+  }
 };

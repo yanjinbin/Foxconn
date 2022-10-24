@@ -1,0 +1,49 @@
+#include <algorithm>
+#include <cmath>
+#include <functional>
+#include <iostream>
+#include <map>
+#include <queue>
+#include <set>
+#include <stack>
+#include <unordered_map>
+#include <unordered_set>
+#include <vector>
+
+using namespace std;
+const int MAX_VALUE = 0x7FFFFFFF, MIN_VALUE = 0x80000000, INF = 0x3F3F3F3F, kMod = 1E9 + 7;
+#define ready ios_base::sync_with_stdio(false), cin.tie(0), cout.tie(0);
+#define debug puts("⚡️⚡️bling bling ⚡️⚡️");
+#define FOR(i, a, b) for (int i = a; i < b; i++)
+#define pii pair<int, int>
+#define LL long long
+#define LD long double
+#define PB push_back
+#define EB emplace_back
+#define MP make_pair
+#define FI first
+#define SE second
+
+class Solution {
+public:
+  int partitionDisjoint(vector<int> &nums) {
+    int n = nums.size();
+    vector<int> minArr(n, INT_MAX);
+    vector<int> maxArr(n, INT_MIN);
+    // 右往左 前缀 最小的
+    minArr[n - 1] = nums[n - 1];
+    maxArr[0] = nums[0];
+    for (int i = n - 2; i >= 0; i--) {
+      minArr[i] = min(nums[i], minArr[i + 1]);
+    }
+    // 左往右 后缀最大的
+    for (int i = 0, maxVal = 0; i < n - 1; i++) {
+      maxVal = max(nums[i], maxVal);
+      // 后缀最大 比 前缀最小
+      if (maxVal <= minArr[i + 1]) {
+        return i + 1;
+      }
+    }
+    return -1;
+  }
+};

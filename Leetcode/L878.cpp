@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <assert.h>
 #include <cmath>
 #include <functional>
 #include <iostream>
@@ -47,3 +48,9 @@ public:
   }
   long check(long x, long a, long b, long c) { return (x / a + x / b - x / c); }
 };
+
+int main() {
+  Solution INSTANCE;
+  assert(INSTANCE.nthMagicalNumber(5, 4, 7) == 13);
+  return 0;
+}

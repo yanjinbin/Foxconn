@@ -1,7 +1,4 @@
-#include <cstdio>
-#include <vector>
-
-using namespace std;
+#include "../QuikTemplate.cpp"
 
 class Solution {
 public:

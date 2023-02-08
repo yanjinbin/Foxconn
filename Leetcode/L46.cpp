@@ -1,9 +1,4 @@
-#include <vector>
-#include <iostream>
-#include <functional>
-
-#define FOR(i, a, b) for (int i = a; i < b; i++)
-using namespace std;
+#include "../QuikTemplate.cpp"
 
 class Solution {
 public:

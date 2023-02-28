@@ -1,6 +1,8 @@
-.idea/**
 .vscode/**
+.idea/**
+.fleet/**
 build/**
 venv/**
 .DS_Store
-/cmake-build-debug/
+/cmake-build-debug/**
+/cmake-build-default/**

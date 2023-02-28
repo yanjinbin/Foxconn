@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <cassert>
 #include <cmath>
 #include <functional>
 #include <iostream>
@@ -26,31 +25,26 @@ const int MAX_VALUE = 0x7FFFFFFF, MIN_VALUE = 0x80000000, INF = 0x3F3F3F3F, kMod
 #define FI first
 #define SE second
 
-// https://bit.ly/3Ey9taZ TAG: 容斥原理 二分查找
+int gcd(int a, int b) { return b == 0 ? a : gcd(b, a % b); }
+int lcm(int a, int b) { return a * b / gcd(a, b); }
+
 class Solution {
 public:
-  int gcd(int a, int b) { return b == 0 ? a : gcd(b, a % b); }
-
-  int lcm(int a, int b) { return a * b / gcd(a, b); }
-
-  int nthMagicalNumber(int n, int a, int b) {
-    int c = lcm(a, b);
-    long l = 0, r = (long)1E18;
-    while (l < r) {
-      long mid = l + (r - l) / 2;
-      if (check(mid, a, b, c) >= n) {
-        r = mid;
-      } else {
-        l = mid + 1;
+  long long wonderfulSubstrings(string word) {
+    int n = word.size();
+    vector<int> count(1 << 10);// 之前写成n了 不是10 
+    int state = 0;
+    count[0] = 1; // 初始化
+    LL ans = 0;
+    for (int i = 0; i < n; i++) {
+      int idx = word[i] - 'a';
+      state = state ^ (1 << idx);
+      ans = ans + count[state];
+      for (int i = 0; i < 10; i++) {
+        ans = ans + count[state ^ (1 << i)];
       }
+      count[state]++;
     }
-    return (int)(l % kMod);
+    return ans;
   }
-  long check(long x, long a, long b, long c) { return (x / a + x / b - x / c); }
 };
-
-int main() {
-  Solution INSTANCE;
-  assert(INSTANCE.nthMagicalNumber(5, 4, 7) == 14);
-  return 0;
-}

@@ -5,6 +5,10 @@
 
 #define pii pair<int, int>
 using namespace std;
+const int INF = 0x3F3F3F3F, MOD = 1e9 + 7;
+const int d4i[4] = {-1, 0, 1, 0}, d4j[4] = {0, 1, 0, -1};
+const int d8i[8] = {-1, -1, 0, 1, 1, 1, 0, -1},
+          d8j[8] = {0, 1, 1, 1, 0, -1, -1, -1};
 
 struct Point {
   int x, y, z;
@@ -14,9 +18,9 @@ struct Point {
   bool operator>(const Point &p) const { return this->x > p.x; }  // greater
 };
 
-bool operator<(Point p1, Point p2) {
-  return p1.x < p2.x;
-}  // 重写struct内置的less和greater
+bool operator<(Point p1, Point p2) { return p1.x < p2.x; }
+
+// 重写struct内置的less和greater
 bool cmpP(const Point &s1, const Point &s2) {
   return s1.x > s2.x;
 }  // 自定义一个comparator函数
@@ -73,7 +77,7 @@ int main() {
   cout << q.top().x << endl;
 
   vector<pii> data;
-  data.push_back({1, 2});
+  data.push_back(make_pair(1, 2));
   data.push_back({3, 4});
   data.push_back({3, 5});
   data.push_back({3, 3});

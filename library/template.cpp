@@ -36,11 +36,7 @@ typedef vector<pl> vpl;
 #define se second
 #define mp make_pair
 #define pb push_back
-const ll INFLL = 1LL << 60;
-const int INF = 0x3F3F3F3F, MOD = 1e9 + 7;
-const int d4i[4] = {-1, 0, 1, 0}, d4j[4] = {0, 1, 0, -1};
-const int d8i[8] = {-1, -1, 0, 1, 1, 1, 0, -1},
-        d8j[8] = {0, 1, 1, 1, 0, -1, -1, -1};
+
 
 // Definition for a point.
 struct Point {
@@ -53,33 +49,37 @@ struct Point {
 };
 
 struct Node {
-    int r, c, h;
+  int r, c, h;
 
-    bool operator<(const Node &other) const {
-        return this->h < other.h;
-    }
+  bool operator<(const Node &other) const { return this->h < other.h; }
 };
 
-int main() {
-  vector<Node> arr = {{1, 2, 3}, {2, 3, 4}, {5, 6, 7}, {3, 4, 5}};
-  sort(arr.begin(), arr.end());
-  for (int i = 0; i < arr.size(); i++) {
-    cout << arr[i].h << "\t";
-  }
+int main() { /*
+   vector<Node> arr = {{1, 2, 3}, {2, 3, 4}, {5, 6, 7}, {3, 4, 5}};
+   sort(arr.begin(), arr.end());
+   for (int i = 0; i < arr.size(); i++) {
+     cout << arr[i].h << "\t";
+   }
 
-  // 默认大堆
-  priority_queue<int> q1;
-  q1.push(0);
-  q1.push(1);
-  q1.push(6);
-  cout << endl << q1.top() << endl;
+   // 默认大堆
+   priority_queue<int> q1;
+   q1.push(0);
+   q1.push(1);
+   q1.push(6);
+   cout << endl << q1.top() << endl;*/
 
-    // 优先队列，是对比较器逆反的过程
+  // 优先队列，是对比较器逆反的过程
   priority_queue<Node> minHeap;
   minHeap.push(Node{1, 2, 9});
-    minHeap.push(Node{2, 3, 10});
-    minHeap.push(Node{3, 4, 11});
-    cout << minHeap.top().h << endl;
+  minHeap.push(Node{2, 3, 12});
+  minHeap.push(Node{3, 4, 11});
+  cout << minHeap.top().h << endl;
 
-    return 0;
+  priority_queue<int> mh;
+  mh.push(2);
+  mh.push(10);
+  mh.push(1);
+  cout << mh.top() << endl;
+
+  return 0;
 }

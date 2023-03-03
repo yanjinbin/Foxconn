@@ -250,4 +250,119 @@ public:
       res = -1;
     return res;
   }
+
+  // L207   topology sort+dfs
+  // status 0 unvisited 1 visiting 2 visited
+  bool canFinish(int numCourses, vector<vector<int>> &prerequisites) {
+    vector<vector<int>> G(numCourses);
+    for (const auto &item : prerequisites)
+      G[item[0]].push_back(item[1]);
+
+    vector<int> v(numCourses, 0);
+    vector<int> ans;
+    for (int i = 0; i < numCourses; ++i)
+      if (hasCycle(G, i, v, ans))
+        return false;
+    return true;
+  }
+
+  // 要写成指针类型, 因为是递归 不要传值  传引用啦
+  bool hasCycle(vector<vector<int>> &G, int cur, vector<int> &v, vector<int> &ans) {
+    if (v[cur] == 1)
+      return true;
+    if (v[cur] == 2)
+      return false;
+
+    v[cur] = 1;
+    for (const int t : G[cur])
+      if (hasCycle(G, t, v, ans))
+        return true;
+    v[cur] = 2;
+
+    ans.push_back(cur);
+    return false;
+  }
+
+  // L207 topology sort + BFS 210等同
+  bool canFinish_(int numCourses, vector<vector<int>> &prerequisites) {
+    if (numCourses < 0)
+      return false;
+    if (prerequisites.size() == 0)
+      return true;
+    unordered_map<int, int> indegree;
+    unordered_map<int, set<int>> outDegree;
+    for (vector<int> item : prerequisites) {
+      int v = item[0], u = item[1];
+      indegree[v]++;
+      outDegree[u].insert(v);
+    }
+
+    vector<int> q;
+    for (int i = 0; i < numCourses; i++) {
+      if (indegree[i] == 0) {
+        q.push_back(i);
+      }
+    }
+    vector<int> ans;
+    while (!q.empty()) {
+      int zeroV = q.back();
+      ans.push_back(zeroV);
+      q.pop_back();
+      for (const auto &v : outDegree[zeroV]) {
+        indegree[v]--;
+        if (indegree[v] == 0) {
+          q.push_back(v);
+        }
+      }
+    }
+    return ans.size() == numCourses;
+  }
+
+  // L215
+  int findKthLargest(vector<int> nums, int k) {
+    int left = 0, right = nums.size() - 1;
+    while (true) {
+      int pos = partition(nums, left, right);
+      if (pos == nums.size() - k)
+        return nums[pos];
+      if (pos < nums.size() - k) {
+        left = pos + 1;
+      } else {
+        right = pos - 1;
+      }
+    }
+  }
+
+  void swap(vector<int> &arr, int l, int r) {
+    int tmp = arr[l];
+    arr[l] = arr[r];
+    arr[r] = tmp;
+  }
+
+  int partition(vector<int> &nums, int l, int r) {
+    int j = rand() % (r - l) + l;
+    swap(nums, j, l);
+    int pivotIdx = l;
+    int index = l + 1;
+    // 从左至右遍历
+    for (int i = index; i <= r; i++) {
+      if (nums[i] < nums[pivotIdx]) {
+        swap(nums, i, index);
+        index++;
+      }
+    }
+    swap(nums, pivotIdx, index - 1);
+    return index - 1;
+  }
+  // L283
+  void moveZeroes(vector<int> &nums) {
+    int swapIdx = 0; // 1 2 0 3 4
+                     // 1 2 3 0 4
+    for (int i = 0; i < nums.size(); i++) {
+      if (nums[i] != 0) {
+        swap(nums, swapIdx, i);
+        swapIdx++;
+      }
+    }
+  }
 };

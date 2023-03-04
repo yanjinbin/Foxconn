@@ -30,9 +30,7 @@ const int MAX_VALUE = 0x7FFFFFFF, MIN_VALUE = 0x80000000, INF = 0x3F3F3F3F,
 int gcd(int a, int b) { return b == 0 ? a : gcd(b, a % b); }
 int lcm(int a, int b) { return a * b / gcd(a, b); }
 int lowBit(int x) { return x & (-x + 1); }  // 返回二进制右边第一位1
-
 struct ListNode {
- public:
   int val;
   ListNode *next;
   ListNode()

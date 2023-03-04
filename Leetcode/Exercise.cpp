@@ -1,14 +1,4 @@
 #include "../QuikTemplate.cpp"
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
 
 class Solution {
 public:
@@ -364,5 +354,63 @@ public:
         swapIdx++;
       }
     }
+  }
+
+  // L148
+  ListNode *sortList(ListNode *head) {
+    if (head == nullptr || head->next == nullptr) {
+      return head;
+    }
+    ListNode *slow = head, *fast = head;
+    ListNode *prev = head;
+    while (fast != nullptr && fast->next != nullptr) {
+      prev = slow;
+      slow = slow->next;
+      fast = fast->next->next;
+    }
+    // break
+    prev->next = nullptr;
+    ListNode *l1 = sortList(head);
+    ListNode *l2 = sortList(slow);
+    return mergeTwoLists(l1, l2);
+  }
+
+  ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
+    ListNode *dummyNode = new ListNode(-1);
+    ListNode *cur = dummyNode;
+    while (l1 != nullptr && l2 != nullptr) {
+      if (l1->val < l2->val) {
+        cur->next = new ListNode(l1->val);
+        l1 = l1->next;
+      } else {
+        cur->next = new ListNode(l2->val);
+        l2 = l2->next;
+      }
+      cur = cur->next;
+    }
+    if (l1 == nullptr) {
+      cur->next = l2;
+    } else if (l2 == nullptr) {
+      cur->next = l1;
+    }
+    return dummyNode->next;
+  }
+
+  // L23
+  ListNode *mergeKLists(vector<ListNode *> &lists) {
+    if (lists.size() < 1) {
+      return nullptr;
+    }
+    return mergeKLists(lists, 0, lists.size() - 1);
+  }
+
+  ListNode *mergeKLists(vector<ListNode *> &lists, int start, int end) {
+    if (start == end) {
+      return lists[start];
+    }
+    int mid = (end - start) / 2 + start;
+    ListNode *l1 = mergeKLists(lists, start, mid);
+    ListNode *l2 = mergeKLists(lists, mid + 1, end);
+    return mergeTwoLists(l1, l2);
   }
 };

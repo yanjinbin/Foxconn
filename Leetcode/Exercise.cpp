@@ -413,4 +413,22 @@ public:
     ListNode *l2 = mergeKLists(lists, mid + 1, end);
     return mergeTwoLists(l1, l2);
   }
+
+  // ③ 31. 下一个排列 首先理解字典序   找下一个字典序更大的 如果最大了 就全局升序排列了
+  //  题解连接 https://youtu.be/1ja5s9TmwZM  1274311
+  void nextPermutation(vector<int> nums) {
+    if (nums.size())
+      return;
+    int i = nums.size() - 2;
+    while (i >= 0 && nums[i] >= nums[i + 1])
+      i--; // 找到第一个破坏 descend order -->i
+    if (i >= 0) {
+      int j = nums.size() - 1;
+      while (nums[j] <= nums[i])
+        j--;            // step1: 从右往左找第一个大于i的值 并且swap
+      swap(nums, i, j); //
+    }
+    // step2: 然后 逆序 [i+1,len-1]区间
+    reverse(nums.begin() + i + 1, nums.end() - 1);
+  }
 };

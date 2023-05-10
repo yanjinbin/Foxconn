@@ -414,9 +414,8 @@ public:
     return mergeTwoLists(l1, l2);
   }
 
-  // ③ 31. 下一个排列 首先理解字典序   找下一个字典序更大的 如果最大了 就全局升序排列了
+  // 31. 下一个排列 首先理解字典序   找下一个字典序更大的 如果最大了 就全局升序排列了
   //  题解连接 https://youtu.be/1ja5s9TmwZM  1274311
-
     void nextPermutation(vector<int> &nums) {
       int i = nums.size() - 2;
       while (i >= 0 && nums[i] >= nums[i + 1]) {
@@ -432,5 +431,37 @@ public:
       }
       // step2: 然后 逆序 [i+1,len-1]区间
       reverse(nums.begin() + i + 1, nums.end()); // 126 0389
+    }
+
+    //  239  返回沿数组 固定K窗口长度滑动的最大值
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+      multiset<int> set;
+      vector<int> ans;
+      for(int i=0;i<nums.size();i++){
+        set.insert(nums[i]);
+        if(set.size()>k){
+          set.erase(set.lower_bound(nums[i-k]));
+        }
+        if(set.size()>=k){
+          ans.push_back(*set.rbegin());
+        }
+      }
+      return ans;
+    }
+    vector<int> maxSlidingWindow_(vector<int>& nums, int k) {
+      vector<int> ans;
+      deque<int> q;
+      for(int i=0;i<nums.size();i++){
+        // 正常长度了
+        while (!q.empty()&&(i-q.front())>=k) q.pop_front(); // (i-q.front())>=k 表示当前的队列元素已经是K个了, 第i个元素想要加入, 自然就把最前面的那个Pop
+        while(!q.empty()&& nums[q.back()]<nums[i]){ // 新来的比尾部的大, 那么就把尾部的踢出去, 因为要维持单调递减队列啊
+          q.pop_back();
+        }
+        q.push_back(i); // 正常迭代添加
+        if(i-k+1>=0){ // 当前元素超过 K长度了
+          ans.push_back(nums[q.front()]);
+        }
+      }
+      return ans;
     }
 };

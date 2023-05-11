@@ -324,25 +324,19 @@ public:
     }
   }
 
-  void swap(vector<int> &arr, int l, int r) {
-    int tmp = arr[l];
-    arr[l] = arr[r];
-    arr[r] = tmp;
-  }
-
   int partition(vector<int> &nums, int l, int r) {
     int j = rand() % (r - l) + l;
-    swap(nums, j, l);
+    swap(nums[j], nums[l]);
     int pivotIdx = l;
     int index = l + 1;
     // 从左至右遍历
     for (int i = index; i <= r; i++) {
       if (nums[i] < nums[pivotIdx]) {
-        swap(nums, i, index);
+        swap(nums[i], nums[index]);
         index++;
       }
     }
-    swap(nums, pivotIdx, index - 1);
+    swap(nums[pivotIdx], nums[index - 1]);
     return index - 1;
   }
   // L283
@@ -351,7 +345,7 @@ public:
                      // 1 2 3 0 4
     for (int i = 0; i < nums.size(); i++) {
       if (nums[i] != 0) {
-        swap(nums, swapIdx, i);
+        swap(nums[swapIdx], nums[i]);
         swapIdx++;
       }
     }
@@ -426,9 +420,9 @@ public:
     if (i >= 0) {
       int j = nums.size() - 1;
       while (j >= 0 && nums[j] <= nums[i]) {
-        j--;                    // step1: 从右往左找第一个大于i的值 并且swap // 123 98 60
+        j--;                  // step1: 从右往左找第一个大于i的值 并且swap // 123 98 60
       }
-      ::swap(nums[i], nums[j]); //  // 126 98 30
+      swap(nums[i], nums[j]); //  // 126 98 30
     }
     // step2: 然后 逆序 [i+1,len-1]区间
     reverse(nums.begin() + i + 1, nums.end()); // 126 0389
@@ -479,5 +473,40 @@ public:
       }
     }
     return ans.size();
+  }
+  // 673
+  int findNumberOfLIS(vector<int> &nums) {
+    int N = nums.size();
+    vector<int> len(N, 1);
+    vector<int> num(N, 1);
+    for (int i = 1; i < N; i++) {
+      int maxLen = 1;
+      int maxNum = 1;
+      for (int j = 0; j < i; j++) {
+        if (nums[i] <= nums[j]) {
+          continue;
+        }
+        if (len[j] + 1 > maxLen) {
+          maxLen = len[j] + 1;
+          maxNum = num[j];
+        } else if (len[j] + 1 == maxLen) {
+          maxNum += num[j];
+        }
+      }
+      len[i] = maxLen;
+      num[i] = maxNum;
+    }
+
+    int maxLen = 1;
+    int maxNum = 0;
+    for (int i = 0; i < N; i++) {
+      if (len[i] > maxLen) {
+        maxLen = len[i];
+        maxNum = num[i];
+      } else if (len[i] == maxLen) {
+        maxNum += num[i];
+      }
+    }
+    return maxNum;
   }
 };

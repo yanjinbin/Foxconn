@@ -474,7 +474,8 @@ public:
     }
     return ans.size();
   }
-  // 673
+
+  // 673 https://bit.ly/41sLwvd
   int findNumberOfLIS(vector<int> &nums) {
     int N = nums.size();
     vector<int> len(N, 1);
@@ -509,4 +510,103 @@ public:
     }
     return maxNum;
   }
+
+  // 19
+  ListNode *removeNthFromEnd(ListNode *head, int n) {
+    ListNode *dummyNode;
+    dummyNode->next = head;
+    ListNode *slow = dummyNode;
+    ListNode *fast = dummyNode;
+    for (int i = 0; i < n; i++) {
+      fast = fast->next;
+    }
+    while (fast != nullptr) {
+      slow = slow->next;
+      fast = fast->next;
+    }
+    slow->next = slow->next->next;
+    return dummyNode->next;
+  }
+  // 1  3  7  9  11  17  18  20 30 , target = 18
+  // 17  18  20 30
+  //               1  3  7  9  11
+
+  // L33 折断的升序数组的二分查找
+  int search(vector<int> &nums, int target) {
+    int lo = 0, hi = nums.size() - 1;
+    while (lo <= hi) {
+      int mid = (hi - lo) / 2 + lo;
+      if (nums[mid] == target)
+        return mid;
+      if (nums[mid] < nums[hi]) {
+        if (nums[mid] < target && target <= nums[hi]) {
+          lo = mid + 1;
+        } else {
+          hi = mid - 1;
+        }
+      } else {
+        if (nums[mid] > target && target >= nums[lo]) {
+          hi = mid - 1;
+        } else {
+          lo = mid + 1;
+        }
+      }
+    }
+    return -1;
+  }
+  // 打印数组
+  //
+  // left    right
+  // lo
+  //  y
+  // hi
+  // left x  right
+  //
+
+  // L54 螺旋数组
+  vector<int> spiralOrder(vector<vector<int>> &matrix) {
+    int left = 0, right = matrix[0].size() - 1;
+    int up = 0, down = matrix.size() - 1;
+    vector<int> ans;
+    while (up <= down && left <= right) {
+      for (int i = left; i <= right; i++) {
+        ans.push_back(matrix[up][i]);
+      }
+      up++;
+      for (int i = up; i <= down; i++) {
+        ans.push_back(matrix[i][right]);
+      }
+      right--;
+      if (up <= down) {
+        for (int i = right; i >= left; i--) {
+          ans.push_back(matrix[down][i]);
+        }
+      }
+      down--;
+      if (left <= right) {
+        for (int i = down; i >= up; i--) {
+          ans.push_back(matrix[i][left]);
+        }
+      }
+      left++;
+    }
+    return ans;
+  }
+
+  // L74
+  bool searchMatrix(vector<vector<int>> &matrix, int target) {
+    int x = matrix.size() - 1, y = 0;
+    while (x >= 0 && y <= matrix[0].size() - 1) {
+      if (matrix[x][y] > target) {
+        x--;
+      } else if (matrix[x][y] < target) {
+        y++;
+      } else {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // between m n
 };

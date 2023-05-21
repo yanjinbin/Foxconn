@@ -608,5 +608,20 @@ public:
     return false;
   }
 
-  // between m n
+  // L124 二叉树最大路径和
+  int ans124 = INF;
+  int maxPathSum(TreeNode *root) {
+    if (root == nullptr)
+      return 0;
+    dfs124(root);
+    return ans124;
+  }
+  int dfs124(TreeNode *root) {
+    if (root == nullptr)
+      return 0;
+    int l = max(dfs124(root->left), 0);
+    int r = max(dfs124(root->right), 0);
+    ans124 = max(ans124, l + r + root->val);
+    return max(l, r) + root->val;
+  }
 };

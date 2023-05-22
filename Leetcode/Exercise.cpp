@@ -624,4 +624,59 @@ public:
     ans124 = max(ans124, l + r + root->val);
     return max(l, r) + root->val;
   }
+  // 83
+  ListNode *deleteDuplicates(ListNode *head) {
+    ListNode *cur = head;
+    while (cur != nullptr && cur->next != nullptr) {
+      if (cur->val == cur->next->val) {
+        cur->next = cur->next->next;
+      } else {
+        cur = cur->next;
+      }
+    }
+    return head;
+  }
+  // 419
+  int countBattleships(vector<vector<char>> &board) {
+    int count = 0;
+    for (int i = 0; i < board.size(); i++) {
+      for (int j = 0; j < board[i].size(); j++) {
+        if (board[i][j] == 'X') {
+          // dfs遍历的时候 根据战舰的规则，左or上是X,就不计数。
+          if (i > 0 && board[i - 1][j] == 'X' || j > 0 && board[i][j - 1] == 'X') {
+            continue;
+          } else {
+            count++;
+          }
+        }
+      }
+    }
+    return count;
+  }
+  
+  // 450
+  TreeNode *deleteNode(TreeNode *root, int key) {
+    if (root == nullptr)
+      return root;
+    if (root->val < key) {
+      root->right = deleteNode(root->right, key);
+    } else if (root->val > key) {
+      root->left = deleteNode(root->left, key);
+    } else {
+      if (root->left == nullptr)
+        return root->right;
+      if (root->right == nullptr) {
+        return root->left;
+      }
+      root->val = findMin(root->right);
+      root->right = deleteNode(root->right, root->val);
+    }
+    return root;
+  }
+  int findMin(TreeNode *root) {
+    while (root->left != nullptr) {
+      root = root->left;
+    }
+    return root->val;
+  }
 };

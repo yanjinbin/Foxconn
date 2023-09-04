@@ -53,6 +53,7 @@ public:
     }
     return ans;
   }
+
   // L40
   vector<vector<int>> combinationSum2(vector<int> &candidates, int target) {
     vector<vector<int>> ans;
@@ -420,7 +421,7 @@ public:
     if (i >= 0) {
       int j = nums.size() - 1;
       while (j >= 0 && nums[j] <= nums[i]) {
-        j--;                  // step1: 从右往左找第一个大于i的值 并且swap // 123 98 60
+        j--; // step1: 从右往左找第一个大于i的值 并且swap // 123 98 60
       }
       swap(nums[i], nums[j]); //  // 126 98 30
     }
@@ -653,7 +654,7 @@ public:
     }
     return count;
   }
-  
+
   // 450
   TreeNode *deleteNode(TreeNode *root, int key) {
     if (root == nullptr)
